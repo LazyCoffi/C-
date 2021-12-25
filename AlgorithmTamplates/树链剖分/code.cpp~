@@ -1,0 +1,74 @@
+#include <iostream>
+#include <cstdio>
+#include <cstring>
+#include <cstdlib>
+#include <cmath>
+#include <algorithm>
+#include <vector>
+using namespace std;
+typedef long long ll;
+const int N = 1e5 + 7, M = 1e5 + 7;
+
+int dep[N], siz[N], fa[N], initVal[N], son[N], top[N], sonTree[N];
+vector<int> E[N];
+
+int n, m, root, p, dfn;
+
+ll read() {
+	char ch;
+	int res = 0;
+	ch = getchar();
+	while (ch < '0' || ch > '9') ch = getchar();
+	while (ch >= '0' && ch <= '9') {
+		res = res * 10 + ch - '0';
+		ch = getchar();
+	}
+	return res;
+}
+
+void dfs1(int u) {
+	siz[u] = 1;
+	for (int v : E[u]) {
+		if (v == fa[u]) continue;
+		fa[v] = u;
+		dep[v] = dep[u] + 1;
+		dfs1(v);
+		siz[u] += siz[v];
+		if (siz[son[u]] < siz[v]) son[u] = v;
+	}
+}
+
+void dfs2(int u, int tp) {
+	top[u] = tp;
+	id[u] = ++ dfn;
+	val[dfn] = initVal[u];
+
+	if (son[u]) top[u] = tp, dfs2(u, tp);
+
+	else {
+		top[u] = u;
+		for (int v : E[u]) {
+			if (v == fa[u] || v == son[u]) continue;
+			dfs2(v, v);
+		}
+	}
+
+	sonTree[u] = dfn;
+}
+
+int main() {
+	cin >> n >> m >> root >> p;
+	for (int i = 1; i <= n; i ++) initVal[i] = read();
+	for (int i = 1; i < n; i ++) {
+		int u, v;
+		u = read(), v = read();
+		E[u].push_back(v); 
+		E[v].push_back(u);
+	}
+
+	dfs1(root);
+	dfs2(root, root);
+	
+
+	
+}
