@@ -25,12 +25,12 @@ int main() {
 	double h = (r - l) / n;
 	for (int i = 1; i <= n; i ++) {
 		double x_, y_;
-		double k1, k2, k3, k4;
+		double k1, k2, k3, k4;//依次构造k1,k2,k3,k4并加权平均
 		x_ = x + h;
-		k1 = f2(x, y);
-		k2 = f2(x + 0.5 * h, y + 0.5 * h * k1);
-		k3 = f2(x + 0.5 * h, y + 0.5 * h * k2);
-		k4 = f2(x + h, y + h * k3);
+		k1 = f(x, y);
+		k2 = f(x + 0.5 * h, y + 0.5 * h * k1);
+		k3 = f(x + 0.5 * h, y + 0.5 * h * k2);
+		k4 = f(x + h, y + h * k3);
 		y_ = y + h / 6 * (k1 + 2 * k2 + 2 * k3 + k4);
 		cout << "y" << i << " = " << y_ << endl;
 		x = x_, y = y_;

@@ -23,13 +23,13 @@ int main() {
 	
 	double h = (r - l) / n;
 	x = l;
-	for (int i = 1; i <= n; i ++) {
+	for (int i = 1; i <= n; i ++) {//改进欧拉方法
 		double x_ = x + h;
-		double f0 = f_3(x, y);
+		double f0 = f_1(x, y);
 		double y_ = y + h * f0;
-		double f1 = f_3(x_, y_);
+		double f1 = f_1(x_, y_);
 		y = y + h / 2 * (f0 + f1);
-		cout << "y" << i << " = " << y << endl;
+		if (i % 2 == 0) {cout << "y" << i << " = " << y << endl;}
 		x = x_;
 	}
 }

@@ -12,7 +12,7 @@ double f(double x) {
 	return sin(x) / x;
 }
 
-void add_T() {
+void add_T() {//递推构造T
 	int k = T.size();
 	int n = (1 << (k - 1));
 	double res = 0;
@@ -27,19 +27,19 @@ void add_T() {
 	T.push_back(res);
 }
 
-void add_S() {
+void add_S() {//递推构造S
 	while (T.size() <= S.size() + 1) add_T();
 	int n = T.size() - 1;
 	S.push_back((4 * T[n] - T[n - 1]) / 3);
 }
 
-void add_C() {
+void add_C() {//递推构造C
 	while (S.size() <= C.size() + 1) add_S();
 	int n = S.size() - 1;
 	C.push_back((16 * S[n] - S[n - 1]) / 15);
 }
 
-void add_R() {
+void add_R() {//递推构造R
 	while (C.size() <= R.size() + 1) add_C();
 	int n = C.size() - 1;
 	R.push_back((64 * C[n] - C[n - 1]) / 63);
@@ -48,8 +48,8 @@ void add_R() {
 int main() {
 	freopen("rom.in", "r", stdin);
 	cin >> l >> r >> eps;
-	T.push_back(0.5 * (r - l) * (f(l) + f(r)));
-	add_R(); add_R();
+	T.push_back(0.5 * (r - l) * (f(l) + f(r)));//计算T1
+	add_R(); add_R();//通过向下迭代，依次获得T,S,C后构造R
 	for (int i = 1; abs(R[i] - R[i - 1]) > eps; add_R(), i ++);
 	cout << "T: ";
 	for (double t : T) cout << t << " ";

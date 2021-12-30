@@ -17,13 +17,13 @@ int main() {
 	double l, r, x, y;
 	cin >> l >> r >> y >> n;
 	
-	double h = (r - l) / n;
+	double h = (r - l) / n;//获取步距
 	x = l;
-	for (int i = 1; i <= n; i ++) {
+	for (int i = 1; i <= n; i ++) {//欧拉方法求结果
 		double x_ = x + h;
-		double f0 = f_1(x, y);
+		double f0 = f(x, y);
 		double y_ = y + h * f0;
-		double f1 = f_1(x_, y_);
+		double f1 = f(x_, y_);
 		y = y + h / 2 * (f0 + f1);
 		cout << "y" << i << " = " << y_ << endl;
 		x = x_, y = y_;
