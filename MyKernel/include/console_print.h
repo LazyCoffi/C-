@@ -26,7 +26,7 @@ enum real_color {
 
 void console_set_cursor();
 
-void console_clear_screen();
+void console_clean_screen();
 
 void console_scroll();
 
@@ -36,6 +36,6 @@ void console_print_colored_char(char ch, real_color_t fg, real_color_t bg);
 
 void console_print_str(char *str);
 
-void console_colored_print_str(char *str, real_color_t fg_color, real_color_t bg_color);
+void console_colored_print_str(char *str, real_color_t fg, real_color_t bg);
 
 #endif
