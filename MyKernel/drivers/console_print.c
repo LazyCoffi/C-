@@ -36,11 +36,11 @@ void console_scroll() {
     uint16_t blank = 0x20 | (blank_color << 8);  // space 是 0x20
 
     for (int i = 0 * 80; i < 24 * 80; i++) {
-        video_memory[i] = video_memory[i+80];
+        screen_content[i] = screen_content[i+80];
     }
 
     for (int i = 24 * 80; i < 25 * 80; i++) {
-        video_memory[i] = blank;
+        screen_content[i] = blank;
     }
 
     cursor_y = 24;
@@ -62,7 +62,7 @@ void console_print_colored_char(char ori_ch, real_color_t fg, real_color_t bg) {
         cursor_x = 0;
         cursor_y ++;
     } else if (ch >= ' ') {
-        console_content[cursor_y * 80 + cursor_x] = ch;
+        screen_content[cursor_y * 80 + cursor_x] = ch;
         cursor_x ++;
     }
 
@@ -83,11 +83,10 @@ void console_print_char(char ch) {
 void console_print_colored_str(char *str, real_color_t fg, real_color_t bg) {
     while (*str) {
         console_print_colored_char(*str, fg, bg);
+        str++;
     }
 }
 
 void console_print_str(char *str) {
     console_print_colored_str(str, rc_white, rc_black);
 }
-
-
