@@ -1,5 +1,5 @@
-#ifndef _INCLUDE_SCREEN_PRINT_H
-#define _INCLUDE_SCREEN_PRINT_H
+#ifndef _INCLUDE_SCREEN_PRINT_H_
+#define _INCLUDE_SCREEN_PRINT_H_
 
 #include "type.h"
 #include "port_io.h"

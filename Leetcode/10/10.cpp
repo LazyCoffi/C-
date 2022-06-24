@@ -1,11 +1,12 @@
 #include <iostream>
 #include <cstring>
+#include <map>
 using namespace std;
 
 class Solution {
 public:
     bool isMatch(string s, string p) {
-        int n = s.size(), m = p.size();
+        int n = s.size()   ,m = p.size();
         bool f[35][35] = {false};
         f[0][0] = true;
 
@@ -39,6 +40,7 @@ int main() {
     Solution *sol = new Solution();
     string s = "ab";
     string p = ".*";
+
     if (sol->isMatch(s, p)) {
         cout << "Yes";
     }

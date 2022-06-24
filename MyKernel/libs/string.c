@@ -17,6 +17,10 @@ void memset(void *dest, uint8_t val, uint32_t len) {
     }
 }
 
+void bzero(void *dest, uint32_t len) {
+    memset(dest, 0, len);
+}
+
 char *strcpy(char *dest, const char *src) {
     char *cp = dest;
     while (*cp++ = *src++); 
