@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Area2D.gd" type="Script" id=1]
+[ext_resource path="res://asserts/art/reimu1.png" type="Texture" id=2]
+[ext_resource path="res://asserts/art/reimu2.png" type="Texture" id=3]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 24, 33 )
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "right",
+"speed": 3.0
+} ]
+
+[node name="Player" type="Area2D"]
+position = Vector2( -10, 0 )
+script = ExtResource( 1 )
+speed = 400
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 1 )
+shape = SubResource( 2 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0.222919, 1 )
+scale = Vector2( 0.992569, 1.0303 )
+frames = SubResource( 1 )
+animation = "right"
+frame = 1
+playing = true

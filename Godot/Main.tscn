@@ -1,0 +1,58 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Main.gd" type="Script" id=1]
+[ext_resource path="res://Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://MobScene.tscn" type="PackedScene" id=3]
+[ext_resource path="res://asserts/art/wallhaven-ne5jwr.jpg" type="Texture" id=4]
+[ext_resource path="res://Trap.tscn" type="PackedScene" id=5]
+
+[sub_resource type="Curve2D" id=1]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 448, 0, 0, 0, 0, 0, 448, 720, 0, 0, 0, 0, 0, 720, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 )
+}
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 65, 55 )
+
+[node name="Main" type="Node"]
+script = ExtResource( 1 )
+mob_scene = ExtResource( 3 )
+trap_scene = ExtResource( 5 )
+
+[node name="TrapTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="MobTimer" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="StartTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="ScoreTimer" type="Timer" parent="."]
+
+[node name="StartPosition" type="Position2D" parent="."]
+position = Vector2( 240, 144 )
+
+[node name="MobPath" type="Path2D" parent="."]
+curve = SubResource( 1 )
+
+[node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+light_mask = 512
+margin_right = 480.0
+margin_bottom = 720.0
+texture = ExtResource( 4 )
+expand = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2( 240, 300 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( 0, 236 )
+shape = SubResource( 2 )
+disabled = true
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 240, 72 )
